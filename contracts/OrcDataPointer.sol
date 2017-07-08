@@ -22,6 +22,8 @@ contract OrcDataPointer {
 
     /// Update the given pointer to a new state of the data.
     function updatePointer(bytes32 _pointer) onlyOwner{
-        pointer = _pointer;
+        assembly {
+            pointer := mload(add(_pointer, 24))
+        }
     }
 }
